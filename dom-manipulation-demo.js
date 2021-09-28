@@ -7,13 +7,28 @@ const resetDoneTaskBtn = document.getElementById('reset-all-done-task-btn');
 // load saved tasks from localStorage
 const savedTasks = JSON.parse(localStorage.getItem('savedTasks')) || [];
 
+function persistInMemoryTasks() {
+  localStorage.setItem('savedTasks', JSON.stringify(savedTasks));
+}
+
+function addTask(task) {
+  const taskItemElement = document.createElement('li');
+  function toggleDone() {
+    taskItemElement.classList.toggle('task-done');
+    task.done = !task.done;
+    persistInMemoryTasks();
+  }
+  taskItemElement.innerText = task.name;
+  if (task.done) {
+    taskItemElement.classList.add('task-done');
+  }
+  taskItemElement.addEventListener('click', toggleDone);
+  taskList.appendChild(taskItemElement);
+}
+
 // add saved tasks to the DOM when the app starts
 for (let i = 0; i < savedTasks.length; i++) {
   addTask(savedTasks[i]);
-}
-
-function persistInMemoryTasks() {
-  localStorage.setItem('savedTasks', JSON.stringify(savedTasks));
 }
 
 function createTask(name) {
@@ -32,21 +47,6 @@ function forgetDoneTasks() {
   }
   // remove from storage
   persistInMemoryTasks();
-}
-
-function addTask(task) {
-  const taskItemElement = document.createElement('li');
-  function toggleDone() {
-    taskItemElement.classList.toggle('task-done');
-    task.done = !task.done;
-    persistInMemoryTasks();
-  }
-  taskItemElement.innerText = task.name;
-  if (task.done) {
-    taskItemElement.classList.add('task-done');
-  }
-  taskItemElement.addEventListener('click', toggleDone);
-  taskList.appendChild(taskItemElement);
 }
 
 function removeDoneTasks() {

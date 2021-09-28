@@ -1,4 +1,6 @@
 const status = document.getElementById('geoloc-status');
+// eslint-disable-next-line
+const L = L;
 
 function onGeolocSuccess(position) {
   const lat = position.coords.latitude;
