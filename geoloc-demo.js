@@ -1,16 +1,17 @@
 const status = document.getElementById('geoloc-status');
-// eslint-disable-next-line
-const L = L;
 
 function onGeolocSuccess(position) {
   const lat = position.coords.latitude;
   const lng = position.coords.longitude;
   status.innerHTML = `lat : ${lat}, lng : ${lng}`;
+  // eslint-disable-next-line
   const map = L.map('mapid').setView([lat, lng], 13);
+  // eslint-disable-next-line
   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution:
       '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   }).addTo(map);
+  // eslint-disable-next-line
   L.marker([lat, lng]).addTo(map).bindPopup('IM HERE :O').openPopup();
 }
 
