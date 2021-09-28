@@ -1,9 +1,9 @@
-const status = document.getElementById('geoloc-status');
+const statusElement = document.getElementById('geoloc-status');
 
 function onGeolocSuccess(position) {
   const lat = position.coords.latitude;
   const lng = position.coords.longitude;
-  status.innerHTML = `lat : ${lat}, lng : ${lng}`;
+  statusElement.innerHTML = `lat : ${lat}, lng : ${lng}`;
   // eslint-disable-next-line
   const map = L.map('mapid').setView([lat, lng], 13);
   // eslint-disable-next-line
@@ -21,9 +21,9 @@ function onGeolocError(error) {
 
 document.getElementById('geoloc-button').addEventListener('click', function () {
   if (!navigator.geolocation) {
-    status.textContent = 'Geolocation is not supported by your browser';
+    statusElement.textContent = 'Geolocation is not supported by your browser';
   } else {
-    status.textContent = 'Locating…';
+    statusElement.textContent = 'Locating…';
     navigator.geolocation.getCurrentPosition(onGeolocSuccess, onGeolocError, {
       enableHighAccuracy: true,
       timeout: 5000,
