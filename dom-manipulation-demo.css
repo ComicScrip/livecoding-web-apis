@@ -1,4 +1,5 @@
-ul li, button {
+ul li,
+button {
   cursor: pointer;
 }
 
